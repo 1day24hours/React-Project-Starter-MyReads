@@ -14,7 +14,8 @@ class Book extends React.Component {
                 <div className="book">
                     <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, 
-                            backgroundImage: `url('${this.props.book.imageLinks.thumbnail}')`}}></div>
+                        //something wrong with it
+                            backgroundImage: `{url('${this.props.book.imageLinks ? this.props.book.thumbnail : "https://books.google.com/googlebooks/images/no_cover_thumb.gif"})`}}></div>
                         <div className="book-shelf-changer">
                             <select 
                                 //pass shelf's state to value

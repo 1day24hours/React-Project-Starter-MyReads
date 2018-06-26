@@ -1,26 +1,29 @@
 import React from 'react'
 import Book from './Book'
-import BooksApp from './App'
-
-class BookShelf extends React.Component {
-    render() {
-        return (
-            <div className="bookshelf">
-                <h2 className="bookshelf-title">{this.props.title}</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        {this.props.books.map((book) => (
-                            <Book
+// Stateless component for improving performance
+function BookShelf(props) {
+    return (
+        <div className="bookshelf">
+            <h2 className="bookshelf-title">{props.title}</h2>
+            <div className="bookshelf-books">
+                <ol className="books-grid">
+                    {props.books.map((book) => (
+                        <Book
                             key={book.id}
                             book={book}
-                            updateShelf={this.props.updateShelf}
-                            />
-                        ))}
-                    </ol>
-                </div>
+                            updateShelf={props.updateShelf}
+                        />
+                    ))}
+                </ol>
             </div>
-        )
-    }
+        </div>
+    )
 }
+
+
+// class BookShelf extends React.Component {
+//     render() {
+       
+// }
 
 export default BookShelf

@@ -18,7 +18,8 @@ class BooksApp extends React.Component {
   }
   // get all books data
   getBooks () {
-    BooksAPI.getAll().then((books) => this.setState({ books: books }));
+    BooksAPI.getAll().then((books) => 
+    this.setState({ books }));
   }
   // componentDidMout() to fetch data
   componentDidMount() {
@@ -27,13 +28,22 @@ class BooksApp extends React.Component {
   }
   // update or change book's state on the shelf
   updateShelf (book,shelf) {
-    BooksAPI.update(book, shelf).then(() => {
-      this.getBooks();
-    })
+    BooksAPI.update(book, shelf).then((books) => 
+    this.setState({ books })); //something wrong with it
+  }
+  //Every bind call returns a new func,in order to avoid a new func,
+  //it is suggested to bind the event handler for the rendering method in the constructor
+  constructor() {
+    super();
+    this.updateShelf = this.updateShelf;
   }
   //search book and books'state
   search(query) {
-    BooksAPI.search(query).then((books) => this.setState({ searchBooks:books }))
+    if (query.isArray) {
+      BooksAPI.search(query).then((books) => this.setState({ searchBooks: books }));
+    } else {
+      alert('There is no key words.');
+    }
   }
   render() {
     return (
@@ -67,7 +77,7 @@ class BooksApp extends React.Component {
                     key={books.id}
                     book={books}
                     //as well as need to bind to 'this'
-                    updateShelf={this.updateShelf.bind(this)} />
+                    updateShelf={this.updateShelf} />
                 ))}
               </ol>
             </div>
@@ -84,17 +94,17 @@ class BooksApp extends React.Component {
                 title='読んでいる本です'
                 books={this.state.books.filter((book) => book.shelf === 'currentlyReading')}
                 // bind 'this' to App.js
-                updateShelf={this.updateShelf.bind(this)}
+                updateShelf={this.updateShelf}
                 />
                 <BookShelf
                 title='読みたい本'
                 books={this.state.books.filter((book) => book.shelf ==='wantToRead')}
-                updateShelf={this.updateShelf.bind(this)}
+                updateShelf={this.updateShelf}
                  />
                 <BookShelf
                 title='読み終わった本'
                 books={this.state.books.filter((book) => book.shelf === 'read')}
-                updateShelf={this.updateShelf.bind(this)}
+                updateShelf={this.updateShelf}
                  /> 
               </div>
             </div>
