@@ -21,8 +21,9 @@ class BooksApp extends React.Component {
   }
   // update or change book's state on the shelf
   updateShelf (book,shelf) {
-    BooksAPI.update(book, shelf).then((books) => 
-    this.setState({ books })); //something wrong with it
+    BooksAPI.update(book, shelf).then(() => {
+      this.getBooks;
+    })
   }
   //Every bind call returns a new func,in order to avoid a new func,
   //it is suggested to bind the event handler for the rendering method in the constructor
