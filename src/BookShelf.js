@@ -20,10 +20,4 @@ function BookShelf(props) {
     )
 }
 
-
-// class BookShelf extends React.Component {
-//     render() {
-       
-// }
-
 export default BookShelf
