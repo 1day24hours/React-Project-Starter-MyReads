@@ -4,18 +4,13 @@ class Book extends React.Component {
     render() {
         // initialize the shelf's state
         let shelf ='';
-        if (this.props.book.shelf) {
-            shelf = this.props.book.shelf;
-        } else {
-            shelf = 'none';
-        }
+        this.props.book ?  this.props.book.shelf : 'none';
         return (
             <li>
                 <div className="book">
                     <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, 
-                        //something wrong with it
-                            backgroundImage: `{url('${this.props.book.imageLinks ? this.props.book.thumbnail : "https://books.google.com/googlebooks/images/no_cover_thumb.gif"})`}}></div>
+                            backgroundImage: `url(${this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail :'https://books.google.com/googlebooks/images/no_cover_thumb.gif"'})`}}></div>
                         <div className="book-shelf-changer">
                             <select 
                                 //pass shelf's state to value
